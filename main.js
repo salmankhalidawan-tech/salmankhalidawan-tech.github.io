@@ -1,44 +1,171 @@
 /* ============================================================
    SALMAN AWAN PORTFOLIO – main.js
-   Handles: nav scroll, mobile menu, scroll reveal, form
    ============================================================ */
 
-// ── Nav: add 'scrolled' class on scroll ──────────────────────
-const nav = document.getElementById('nav');
-function handleNavScroll() {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+/* ── Letter-reveal hero name ──────────────────────────────────── */
+const heroName = document.getElementById('heroName');
+if (heroName) {
+  const lines = heroName.querySelectorAll('.line');
+  let globalIndex = 0;
+  lines.forEach(line => {
+    const text = line.textContent;
+    line.textContent = '';
+    text.split('').forEach(ch => {
+      const span = document.createElement('span');
+      span.className = 'letter' + (ch === ' ' ? ' space' : '');
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.style.transitionDelay = `${0.25 + globalIndex * 0.028}s`;
+      line.appendChild(span);
+      globalIndex++;
+    });
+  });
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      heroName.querySelectorAll('.letter').forEach(l => l.classList.add('in'));
+    });
+  });
 }
+
+/* ── Interactive particle constellation background ───────────── */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+function initParticles() {
+  const count = Math.min(90, Math.floor((window.innerWidth * window.innerHeight) / 16000));
+  particles = Array.from({ length: count }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    r: Math.random() * 1.4 + 0.5
+  }));
+}
+resizeCanvas();
+initParticles();
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+function drawFrame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    if (mouse.x !== null) {
+      const dx = p.x - mouse.x, dy = p.y - mouse.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 130) {
+        const force = (130 - dist) / 130 * 0.6;
+        p.x += (dx / dist) * force;
+        p.y += (dy / dist) * force;
+      }
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(220, 230, 255, 0.55)';
+    ctx.fill();
+  });
+
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 130) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(91, 140, 255, ${0.12 * (1 - dist / 130)})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(drawFrame);
+}
+
+if (!prefersReducedMotion) {
+  requestAnimationFrame(drawFrame);
+} else {
+  drawFrame();
+}
+
+/* ── Custom cursor ─────────────────────────────────────────────── */
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+
+if (!isCoarsePointer) {
+  let ringX = window.innerWidth / 2, ringY = window.innerHeight / 2;
+  let targetX = ringX, targetY = ringY;
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX; targetY = e.clientY;
+    cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  });
+
+  function animateRing() {
+    ringX += (targetX - ringX) * 0.18;
+    ringY += (targetY - ringY) * 0.18;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .panel').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+  });
+}
+
+/* ── Magnetic buttons ──────────────────────────────────────────── */
+if (!isCoarsePointer) {
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${relX * 0.25}px, ${relY * 0.25}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0, 0)'; });
+  });
+}
+
+/* ── Scroll progress bar ───────────────────────────────────────── */
+const progressBar = document.getElementById('progress');
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = `${pct}%`;
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+/* ── Nav: 'scrolled' state ──────────────────────────────────────── */
+const nav = document.getElementById('nav');
+function handleNavScroll() { nav.classList.toggle('scrolled', window.scrollY > 20); }
 window.addEventListener('scroll', handleNavScroll, { passive: true });
 handleNavScroll();
 
-// ── Theme toggle ──────────────────────────────────────────────
-const themeToggle = document.getElementById('themeToggle');
-const sunIcon = themeToggle.querySelector('.sun-icon');
-const moonIcon = themeToggle.querySelector('.moon-icon');
-
-const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-setTheme(currentTheme);
-
-themeToggle.addEventListener('click', () => {
-  const activeTheme = document.documentElement.getAttribute('data-theme');
-  setTheme(activeTheme === 'dark' ? 'light' : 'dark');
-});
-
-function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  if (theme === 'dark') {
-    sunIcon.style.display = 'none';
-    moonIcon.style.display = 'block';
-  } else {
-    sunIcon.style.display = 'block';
-    moonIcon.style.display = 'none';
-  }
-}
-
-// ── Mobile menu toggle ────────────────────────────────────────
-const burger     = document.getElementById('burger');
-const mobileMenu = document.getElementById('mobileMenu');
+/* ── Mobile menu ──────────────────────────────────────────────────*/
+const burger      = document.getElementById('burger');
+const mobileMenu  = document.getElementById('mobileMenu');
 const mobileLinks = document.querySelectorAll('.mobile-link');
 
 function toggleMenu(open) {
@@ -46,65 +173,51 @@ function toggleMenu(open) {
   mobileMenu.classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
 }
-
-burger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.contains('open');
-  toggleMenu(!isOpen);
-});
-
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => toggleMenu(false));
-});
-
-// Close menu on outside click
+burger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 document.addEventListener('click', (e) => {
-  if (
-    mobileMenu.classList.contains('open') &&
-    !mobileMenu.contains(e.target) &&
-    !burger.contains(e.target)
-  ) {
+  if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !burger.contains(e.target)) {
     toggleMenu(false);
   }
 });
 
-// ── Scroll reveal (Intersection Observer) ────────────────────
+/* ── Scroll reveal ─────────────────────────────────────────────────*/
 const revealEls = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target); // fire once
-      }
-    });
-  },
-  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-);
-
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-// ── Active nav link highlighting ─────────────────────────────
+/* ── Active nav + dot nav tracking ───────────────────────────────*/
 const sections = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.nav__links a');
+const dots      = document.querySelectorAll('.dotnav__dot');
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  },
-  { rootMargin: '-40% 0px -55% 0px' }
-);
+function setActiveSection(id) {
+  navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+  dots.forEach(dot => dot.classList.toggle('active', dot.dataset.target === id));
+}
 
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) setActiveSection(entry.target.getAttribute('id'));
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
 sections.forEach(sec => sectionObserver.observe(sec));
 
-// ── Contact form (Web3Forms Backend integration) ──────────────
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const target = document.getElementById(dot.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+/* ── Contact form (Web3Forms) ────────────────────────────────────*/
 const form     = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 
@@ -117,58 +230,48 @@ form.addEventListener('submit', (e) => {
   const key   = form.querySelector('input[name="access_key"]').value;
 
   if (!name || !email || !msg) {
-    formNote.textContent = '⚠ Please fill in all fields.';
-    formNote.style.color = '#EF4444';
+    formNote.textContent = 'Please fill in all fields.';
+    formNote.style.color = '#F87171';
     return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    formNote.textContent = '⚠ Please enter a valid email address.';
-    formNote.style.color = '#EF4444';
+    formNote.textContent = 'Please enter a valid email address.';
+    formNote.style.color = '#F87171';
     return;
   }
 
   const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…';
+  btn.textContent = 'Sending...';
   btn.disabled = true;
-
-  const formData = {
-    access_key: key,
-    name: name,
-    email: email,
-    message: msg
-  };
 
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(formData)
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ access_key: key, name, email, message: msg })
   })
   .then(async (response) => {
     const data = await response.json();
     if (response.status === 200 || data.success) {
       form.reset();
       form.querySelector('input[name="access_key"]').value = key;
-      formNote.textContent = '✓ Message sent! I\'ll get back to you soon.';
-      formNote.style.color = '#2563EB';
+      formNote.textContent = 'Message sent. I will get back to you soon.';
+      formNote.style.color = '#4ADE80';
     } else {
-      formNote.textContent = `⚠ ${data.message || 'Error sending message.'}`;
-      formNote.style.color = '#EF4444';
+      formNote.textContent = data.message || 'Something went wrong.';
+      formNote.style.color = '#F87171';
     }
   })
   .catch(() => {
-    formNote.textContent = '⚠ Network error. Please try again later.';
-    formNote.style.color = '#EF4444';
+    formNote.textContent = 'Network error. Please try again later.';
+    formNote.style.color = '#F87171';
   })
   .finally(() => {
-    btn.textContent = 'Send Message';
+    btn.textContent = 'Send message';
     btn.disabled = false;
   });
 });
 
-// ── Smooth anchor scroll (polyfill for older browsers) ────────
+/* ── Smooth anchor scroll ─────────────────────────────────────────*/
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const target = document.querySelector(this.getAttribute('href'));
