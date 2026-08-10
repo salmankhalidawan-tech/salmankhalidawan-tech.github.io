@@ -312,7 +312,7 @@ ul { list-style: none; }
 .proj-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: var(--text); border-bottom: 1px solid var(--muted-2); padding-bottom: 2px; transition: color 0.2s ease, border-color 0.2s ease; }
 .proj-link:hover { color: var(--blue); border-color: var(--blue); }
 
-.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .project { transition: transform 0.25s ease, border-color 0.25s ease; }
 .project:hover { transform: translateY(-4px); border-color: rgba(91,140,255,0.3); }
 
