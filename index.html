@@ -1,426 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Muhammad Salman Khalid Awan. AI/ML engineer building automation pipelines and agentic systems." />
-  <title>Salman Awan</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Salman Khalid Awan, AI/ML Engineer</title>
+<meta name="description" content="AI/ML engineer building multi-agent systems and automation. IEEE IES GenAI Challenge 2026 finalist, paper accepted at IRAI 2026. Based in Lahore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Schibsted+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E8EDF1; --ink:#162033; --soft:#4A586E; --blue:#24456B; --mark:#D3E8B0;
+  --sans:'Schibsted Grotesk',system-ui,sans-serif; --serif:'Newsreader',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{display:grid;grid-template-columns:320px minmax(0,1fr);gap:0 72px;max-width:1180px;margin:0 auto;padding:0 40px}
+
+/* left rail */
+aside{position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:36px 30px 32px;margin:24px 0;height:calc(100vh - 48px);background:var(--blue);color:#fff;border-radius:6px}
+.name{font-family:var(--sans);font-weight:900;font-size:1.65rem;line-height:1.08;letter-spacing:-.02em}
+.role{margin-top:12px;color:rgba(255,255,255,.82);font-size:1.02rem;line-height:1.45}
+.status{margin-top:26px;font-size:.98rem;padding:12px 14px;background:var(--mark);color:var(--ink);border-radius:3px;line-height:1.45}
+nav ul{list-style:none;font-family:var(--sans);font-weight:500;font-size:.98rem}
+nav li{margin-bottom:6px}
+nav a{text-decoration:none;color:rgba(255,255,255,.8)}
+nav a:hover{color:var(--mark)}
+.contact{font-family:var(--sans);font-size:.95rem;font-weight:500}
+.contact a{display:block;width:max-content;margin-top:6px;text-decoration:underline;text-decoration-color:var(--mark);text-underline-offset:4px;text-decoration-thickness:2px}
+.contact a:hover{color:var(--mark)}
+aside a:focus-visible{outline-color:var(--mark)}
+
+/* main */
+main{padding:64px 0 120px}
+.hi{font-family:var(--serif);font-style:italic;font-size:1.35rem;margin-bottom:14px}
+.lede{font-family:var(--sans);font-weight:900;font-size:clamp(2.6rem,6.4vw,5.2rem);line-height:.98;letter-spacing:-.035em;max-width:11.5em}
+.lede span{display:block;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.lede span:nth-child(2){animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+.intro{margin-top:36px;max-width:34em;font-size:1.3rem;line-height:1.55}
+.intro em{background:linear-gradient(transparent 58%,var(--mark) 58%);font-style:normal}
+.proof{margin-top:30px;max-width:34em;color:var(--soft)}
+
+h2{font-family:var(--sans);font-weight:900;font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-.03em;line-height:1.1;margin:112px 0 32px}
+h2 span{background:linear-gradient(transparent 60%,var(--mark) 60%);padding:0 4px;margin:0 -4px}
+
+/* lab */
+.lab{margin-top:44px;max-width:34em;background:#fff;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:4px;padding:24px 26px 26px;font-family:var(--sans)}
+.lab h3{font-weight:900;font-size:1.25rem;letter-spacing:-.02em}
+.lab p{font-family:var(--serif);font-size:1rem;color:var(--soft);margin:4px 0 18px;line-height:1.45}
+.lab label{display:flex;justify-content:space-between;font-weight:500;font-size:.95rem;margin-bottom:6px}
+.bar{height:14px;background:rgba(22,32,51,.12);border-radius:7px;margin-bottom:16px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:7px;background:var(--ink);transition:width .25s,background .25s}
+.lab input{width:100%;accent-color:var(--blue);margin-bottom:8px}
+.verdict{font-weight:700;padding:10px 12px;border-radius:3px;margin:6px 0 16px;background:#F6DDD6;color:#7A2414;transition:background .25s,color .25s}
+.verdict.ok{background:var(--mark);color:var(--ink)}
+.lab button{font:inherit;font-weight:700;font-size:.95rem;background:var(--ink);color:#fff;border:0;border-radius:3px;padding:10px 18px;cursor:pointer}
+.lab button:hover{background:var(--blue)}
+.lab button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* glance */
+.glance{margin-top:34px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px;max-width:36em;font-family:var(--sans)}
+.glance div{padding:12px 0;border-top:2px solid var(--ink)}
+.glance b{display:block;font-weight:900;font-size:1.05rem;letter-spacing:-.01em;line-height:1.25}
+.glance span{font-size:.92rem;color:var(--soft)}
+.how p{max-width:34em;margin-bottom:18px}
+.how strong{font-family:var(--sans);font-weight:700}
+
+/* work */
+.feature{padding:0 0 56px}
+.feature h3,.work h3{font-family:var(--sans);font-weight:900;letter-spacing:-.025em;line-height:1.05}
+.feature h3{font-size:2.6rem;margin-bottom:6px}
+.feature .kicker{font-family:var(--sans);font-weight:700;font-size:.95rem;background:var(--ink);color:var(--paper);display:inline-block;padding:3px 10px;border-radius:2px;margin-bottom:16px}
+.feature p{max-width:34em;font-size:1.15rem}
+.result{margin:22px 0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 40px;font-family:var(--sans)}
+.result b{display:block;font-size:2rem;font-weight:900;letter-spacing:-.03em;line-height:1}
+.result small{font-size:.88rem;color:var(--soft);font-weight:500}
+.work{display:grid;grid-template-columns:minmax(0,1fr);gap:44px}
+.work article{max-width:36em}
+.work h3{font-size:1.5rem;margin-bottom:6px}
+.stack{display:block;margin-top:8px;font-family:var(--sans);font-size:.88rem;font-weight:500;color:var(--soft)}
+.link{font-family:var(--sans);font-size:.92rem;font-weight:700;display:inline-block;margin-top:8px;text-decoration:underline;text-decoration-color:var(--blue);text-decoration-thickness:2px;text-underline-offset:4px}
+.link:hover{color:var(--blue)}
+
+/* experience */
+.job{display:grid;grid-template-columns:170px minmax(0,1fr);gap:0 28px;margin-bottom:40px}
+.when{font-family:var(--sans);font-size:.92rem;font-weight:500;color:var(--soft);padding-top:5px}
+.job h3{font-family:var(--sans);font-weight:700;font-size:1.2rem;line-height:1.25}
+.where{color:var(--soft);margin-bottom:8px}
+.job ul{padding-left:1.1em;max-width:34em}
+.job li{margin-bottom:5px}
+
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 40px;max-width:40em}
+.cols h3{font-family:var(--sans);font-weight:700;font-size:1rem;margin-bottom:2px}
+.cols p{color:var(--soft);font-size:1.02rem;line-height:1.5}
+.edu p{margin-bottom:12px;max-width:36em}
+footer{margin-top:104px;padding-top:28px;border-top:2px solid var(--ink)}
+footer a.big{font-family:var(--sans);font-weight:900;font-size:clamp(1.5rem,4vw,2.7rem);letter-spacing:-.03em;text-decoration:none;word-break:break-all}
+footer a.big:hover{color:var(--blue)}
+footer p{margin-top:12px;color:var(--soft);font-size:1rem}
+
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:0 22px}
+  aside{position:static;height:auto;margin:22px 0 0;padding:28px 24px;gap:24px}
+  aside nav{display:none}
+  main{padding-top:40px}
+  h2{margin-top:76px}
+  .job{grid-template-columns:1fr}
+  .when{padding:0 0 2px}
+  .cols{grid-template-columns:1fr}
+  .result{grid-template-columns:repeat(2,auto)}
+}
+@media (max-width:560px){
+  body{font-size:18px}
+  .lede{font-size:2.35rem}
+  .intro{font-size:1.15rem}
+  .glance{grid-template-columns:1fr}
+  .result{grid-template-columns:1fr}
+  .feature h3{font-size:2.1rem}
+  .lab{padding:20px 18px 22px;box-shadow:4px 4px 0 var(--ink)}
+  footer a.big{font-size:1.25rem}
+}
+@media (prefers-reduced-motion:reduce){.lede span{animation:none}html{scroll-behavior:auto}}
+</style>
 </head>
-
 <body>
+<div class="wrap">
 
-  <div class="progress" id="progress"></div>
-  <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
-  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
-  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-
-  <!-- ─── NAV ─── -->
-  <nav class="nav" id="nav">
-    <a href="#home" class="nav__logo">MSKA<span class="dot">.</span></a>
-    <ul class="nav__links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Work</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#credentials">Credentials</a></li>
-      <li><a href="#contact" class="nav__cta">Say hi</a></li>
-    </ul>
-    <button class="nav__burger" aria-label="Toggle menu" id="burger">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
+<aside>
+  <div>
+    <div class="name">Muhammad Salman Khalid Awan</div>
+    <p class="role">AI/ML engineer. Multi-agent systems, fairness auditing and workflow automation. Lahore, Pakistan.</p>
+    <p class="status">Open to AI/ML and automation internships and entry-level roles.</p>
+  </div>
+  <nav aria-label="Sections">
     <ul>
-      <li><a href="#about" class="mobile-link">About</a></li>
-      <li><a href="#experience" class="mobile-link">Experience</a></li>
-      <li><a href="#projects" class="mobile-link">Work</a></li>
-      <li><a href="#skills" class="mobile-link">Skills</a></li>
-      <li><a href="#credentials" class="mobile-link">Credentials</a></li>
-      <li><a href="#contact" class="mobile-link">Say hi</a></li>
+      <li><a href="#work">Selected work</a></li>
+      <li><a href="#how">How I work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education and courses</a></li>
     </ul>
+  </nav>
+  <div class="contact">
+    <a href="mailto:salmanawanlgu@gmail.com">salmanawanlgu@gmail.com</a>
+    <a href="https://www.linkedin.com/in/salmankhalidd/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/salmankhalidawan-tech" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="/resume.pdf" target="_blank" rel="noopener">Download résumé</a>
+  </div>
+</aside>
+
+<main>
+  <p class="hi">Assalam o alaikum, I’m Salman.</p>
+  <h1 class="lede"><span>I build AI systems</span><span>that act, not just answer.</span></h1>
+  <p class="intro">I design multi-agent pipelines and automation that run unattended in production. Then I check them for bias before they get to make decisions about real people, because a model that is fast but unfair isn’t finished. <em>My research framework GenEdge was picked from 305+ international submissions for the IEEE IES GenAI Challenge 2026.</em></p>
+  <div class="glance">
+    <div><b>IEEE IES GenAI Challenge 2026</b><span>Finalist, picked from 305+ submissions</span></div>
+    <div><b>Paper accepted, IRAI 2026</b><span>Melbourne, peer reviewed</span></div>
+    <div><b>Final-year CS, 3.75 GPA</b><span>Lahore Garrison University, graduating 2027</span></div>
+    <div><b>Looking for</b><span>AI/ML or automation internships and entry-level roles</span></div>
   </div>
 
-  <!-- Right-side minimal dot nav -->
-  <div class="dotnav" id="dotnav" aria-hidden="true">
-    <button class="dotnav__dot" data-target="home"><span class="dotnav__tip">Home</span></button>
-    <button class="dotnav__dot" data-target="about"><span class="dotnav__tip">About</span></button>
-    <button class="dotnav__dot" data-target="experience"><span class="dotnav__tip">Experience</span></button>
-    <button class="dotnav__dot" data-target="projects"><span class="dotnav__tip">Work</span></button>
-    <button class="dotnav__dot" data-target="skills"><span class="dotnav__tip">Skills</span></button>
-    <button class="dotnav__dot" data-target="credentials"><span class="dotnav__tip">Credentials</span></button>
-    <button class="dotnav__dot" data-target="contact"><span class="dotnav__tip">Contact</span></button>
+  <section class="lab" aria-labelledby="labt">
+    <h3 id="labt">Try what GenEdge does</h3>
+    <p>This loan model approves two groups at different rates. Drag Group B’s rate, then send in the mitigation agent.</p>
+    <label>Group A approved <b id="va">70%</b></label>
+    <div class="bar"><i style="width:70%"></i></div>
+    <label for="rb">Group B approved <b id="vb">40%</b></label>
+    <input type="range" id="rb" min="10" max="90" value="40">
+    <div class="bar"><i id="bb" style="width:40%"></i></div>
+    <div class="verdict" id="vd" aria-live="polite"></div>
+    <button type="button" id="fix">Run mitigation agent</button>
+  </section>
+
+  <h2 id="work"><span>Things I’ve built</span></h2>
+
+  <article class="feature">
+    <span class="kicker">Accepted at IRAI 2026, Melbourne</span>
+    <h3>GenEdge</h3>
+    <p>A six-agent system that finds and fixes bias in machine learning models without a human running the audit. I built it with CrewAI and IBM AIF360, compared several LLMs, and ran a human evaluation survey to check the results.</p>
+    <div class="result">
+      <div><b>3 of 4</b><small>fairness datasets reached full Disparate Impact parity</small></div>
+      <div><b>305+</b><small>submissions it was selected from</small></div>
+      <div><b>6</b><small>cooperating agents</small></div>
+    </div>
+    <span class="stack">Python, CrewAI, IBM AIF360</span>
+    <a class="link" href="https://github.com/salmankhalidawan-tech/GenEdge-Research-Project" target="_blank" rel="noopener noreferrer">Read the code on GitHub</a>
+  </article>
+
+  <div class="work">
+    <article>
+      <h3>Insaaf AI</h3>
+      <p>Audits loan, admission and hiring decisions for bias and reports in English and Urdu. It measures fairness, explains the cause with SHAP, and a mitigation agent proposes the fix. Checked against a custom Pakistani dataset and the UCI Adult Income benchmark. Built for the Alibaba Cloud AI Hackathon Pakistan 2026 with free and open-source tools only.</p>
+      <span class="stack">Python, FastAPI, CrewAI, scikit-learn, SHAP, React, Tailwind CSS</span>
+    </article>
+    <article>
+      <h3>Shehr AI</h3>
+      <p>A civic-tech referee for city cleanups. Gemini Vision compares a contractor’s claimed cleanup against citizens’ photos, GPS data from the image rules out spam, and each contractor gets a public trust score. Built at the Code for Pakistan Smart City Hackathon 2026 with two teammates.</p>
+      <span class="stack">React, Supabase, Google Gemini Vision API, Tailwind CSS, Vercel</span>
+    </article>
+    <article>
+      <h3>LeadFlow AI</h3>
+      <p>Qualifies inbound leads and drafts personal replies by itself. Conditional routing, human approval gates and retries let it run unattended. It cut manual lead processing by about 60% for the team using it at Tech Buzz.</p>
+      <span class="stack">n8n, OpenAI, GoHighLevel, Gmail, Google Sheets</span>
+    </article>
+    <article>
+      <h3>Digit Recognition CNN</h3>
+      <p>A convolutional network trained from scratch, with no pretrained weights, that reaches 99.14% test accuracy on MNIST in 8 epochs. I studied the confusion matrix and misclassified digits, then served it through a FastAPI endpoint with a live drawing canvas that shows per-class confidence.</p>
+      <span class="stack">Python, PyTorch, FastAPI</span>
+      <a class="link" href="https://github.com/salmankhalidawan-tech/digit-classifier" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+    </article>
+    <article>
+      <h3>RankAI</h3>
+      <p>Ranks candidates against a job description in seconds using TF-IDF and cosine similarity. Full-stack: PDF parsing, FastAPI, PostgreSQL and Docker.</p>
+      <span class="stack">Python, FastAPI, PostgreSQL, Docker</span>
+      <a class="link" href="https://github.com/salmankhalidawan-tech/AI-Assisted-Resume-Screener-and-Candidate-Ranking-System" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+    </article>
+    <article>
+      <p>Earlier projects: <a class="link" style="margin:0" href="https://github.com/salmankhalidawan-tech/Heart-Disease-Prediction" target="_blank" rel="noopener noreferrer">Heart Disease Prediction</a>, a clinical ML pipeline tuned past 85% accuracy, and <a class="link" style="margin:0" href="https://github.com/salmankhalidawan-tech/mindtrace" target="_blank" rel="noopener noreferrer">MindTrace</a>, a local-first mood journal built on VADER sentiment.</p>
+    </article>
   </div>
 
-  <!-- ─── HERO ─── -->
-  <section class="hero" id="home">
-    <div class="hero__content">
-      <p class="hero__hi reveal">Hey, I'm</p>
+  <h2 id="how"><span>How I work</span></h2>
+  <div class="how">
+    <p><strong>I finish the whole thing.</strong> The digit classifier goes from training to a FastAPI endpoint to a live drawing canvas. Insaaf AI goes from data to fairness metrics to an explanation to a proposed fix.</p>
+    <p><strong>I check my own results.</strong> GenEdge was tested on four datasets, compared across several LLMs and checked with a human evaluation survey. The CNN got a confusion matrix, not just an accuracy number.</p>
+    <p><strong>I explain things clearly.</strong> I taught 150+ students over two years and led the Agentic AI domain for IEEE Open Source, so writing docs and walking a team through a design is normal for me.</p>
+  </div>
 
-      <h1 class="hero__name" id="heroName" aria-label="Muhammad Salman Khalid Awan">
-        <span class="line" data-line="1">Muhammad Salman</span>
-        <span class="line grad" data-line="2">Khalid Awan</span>
-      </h1>
+  <h2 id="experience"><span>Where I’ve worked</span></h2>
 
-      <p class="hero__role reveal reveal--delay-2">AI/ML Engineer &middot; Automation &amp; Agentic Systems</p>
-
-      <div class="badge reveal reveal--delay-2">
-        <span class="badge__dot"></span> open to work
-      </div>
-
-      <p class="hero__tagline reveal reveal--delay-3">
-        I work across AI/ML, automation, and agentic systems &mdash; training models,
-        wiring up multi-agent pipelines, and shipping workflows that hold up in
-        production. Most recently that meant building automation at Tech Buzz,
-        alongside a CS degree at Lahore Garrison University.
-      </p>
-
-      <div class="hero__actions reveal reveal--delay-3">
-        <a href="#projects" class="btn btn--primary magnetic">See my work</a>
-        <a href="#contact" class="btn btn--ghost magnetic">Say hi</a>
-      </div>
+  <div class="job">
+    <div class="when">May 2026 to Jul 2026</div>
+    <div>
+      <h3>AI Engineer Intern</h3>
+      <p class="where">Tech Buzz, Lahore</p>
+      <ul>
+        <li>Built and deployed automation workflows in n8n, Zapier and GoHighLevel that cut manual work for business teams.</li>
+        <li>Developed AI agent workflows that handle multi-step tasks, and put LLMs into lead qualification, routing and response generation.</li>
+        <li>Connected CRMs and third-party tools through REST APIs and webhooks.</li>
+      </ul>
     </div>
-
-    <!-- Signature: constellation pipeline -->
-    <div class="constellation reveal reveal--delay-4" role="img" aria-label="A trigger connecting through two AI agents into a shipped output, drawn like a constellation">
-      <svg viewBox="0 0 640 160" class="const-svg">
-        <defs>
-          <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#5B8CFF" stop-opacity="0.55" />
-            <stop offset="100%" stop-color="#8B6BFF" stop-opacity="0.55" />
-          </linearGradient>
-          <radialGradient id="nodeGlow">
-            <stop offset="0%" stop-color="#8FB0FF" />
-            <stop offset="100%" stop-color="#5B8CFF" stop-opacity="0" />
-          </radialGradient>
-        </defs>
-
-        <path class="const-line" d="M60,80 L180,80 L180,40 L320,40" />
-        <path class="const-line" d="M180,80 L180,120 L320,120" />
-        <path class="const-line" d="M320,40 L440,40 L440,80 L560,80" />
-        <path class="const-line" d="M320,120 L440,120 L440,80" />
-
-        <circle class="const-pulse" r="3"><animateMotion dur="4s" repeatCount="indefinite"
-            path="M60,80 L180,80 L180,40 L320,40 L440,40 L440,80 L560,80" /></circle>
-
-        <g class="const-star"><circle r="20" fill="url(#nodeGlow)" cx="60" cy="80" /><circle class="const-core" cx="60" cy="80" r="5" /><text x="60" y="106">trigger</text></g>
-        <g class="const-star"><circle r="20" fill="url(#nodeGlow)" cx="320" cy="40" /><circle class="const-core" cx="320" cy="40" r="5" /><text x="320" y="20">agent</text></g>
-        <g class="const-star"><circle r="20" fill="url(#nodeGlow)" cx="320" cy="120" /><circle class="const-core" cx="320" cy="120" r="5" /><text x="320" y="146">agent</text></g>
-        <g class="const-star"><circle r="20" fill="url(#nodeGlow)" cx="440" cy="80" /><circle class="const-core" cx="440" cy="80" r="5" /><text x="440" y="106">merge</text></g>
-        <g class="const-star const-star--out"><circle r="24" fill="url(#nodeGlow)" cx="560" cy="80" /><circle class="const-core" cx="560" cy="80" r="6" /><text x="560" y="106">shipped</text></g>
-      </svg>
+  </div>
+  <div class="job">
+    <div class="when">Mar 2026 to Sep 2026</div>
+    <div>
+      <h3>Researcher, GenEdge</h3>
+      <p class="where">IEEE Industrial Electronics Society</p>
+      <ul>
+        <li>Co-authored and built GenEdge, a finalist in the IEEE IES Generative AI Challenge 2026.</li>
+        <li>Paper peer reviewed and accepted at IEEE IRAI 2026, Melbourne.</li>
+      </ul>
     </div>
-  </section>
-
-  <!-- ─── MARQUEE ─── -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>PYTHON</span><span>PYTORCH</span><span>N8N</span><span>CREWAI</span><span>FASTAPI</span><span>MULTI-AGENT AI</span><span>ZAPIER</span><span>POSTGRESQL</span><span>PROMPT ENGINEERING</span>
-      <span>PYTHON</span><span>PYTORCH</span><span>N8N</span><span>CREWAI</span><span>FASTAPI</span><span>MULTI-AGENT AI</span><span>ZAPIER</span><span>POSTGRESQL</span><span>PROMPT ENGINEERING</span>
+  </div>
+  <div class="job">
+    <div class="when">Jun 2025 to Jun 2026</div>
+    <div>
+      <h3>Senior Computer Science Lecturer</h3>
+      <p class="where">Unique Group of Institutions, Lahore</p>
+      <ul>
+        <li>Taught Python, C and SQL to 100+ students through project-based work, covering OOP, data structures and databases.</li>
+        <li>Redesigned assessments, which raised student pass rates.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="job">
+    <div class="when">Nov 2024 to Aug 2025</div>
+    <div>
+      <h3>Computer Science Teacher</h3>
+      <p class="where">Tameer-e-Nau Academy, Lahore</p>
+      <ul><li>Taught programming, algorithms and databases in Python, C, C++ and SQL to 50+ students.</li></ul>
     </div>
   </div>
 
-  <!-- ─── ABOUT ─── -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="panel reveal">
-        <span class="eyebrow">About</span>
-        <h2 class="heading">The short version</h2>
-        <p class="body-text">
-          I like building things that actually get used &mdash; AI/ML models, automation
-          pipelines, and agentic systems that hold up outside a demo. Right now that
-          means designing automation workflows at Tech Buzz and putting together
-          multi-agent AI systems on the side. My latest one, GenEdge, got picked from
-          over 300 submissions for the IEEE IES GenAI Challenge, and the paper just got
-          accepted at IRAI 2026 in Melbourne. Before all that, I spent two years teaching
-          Python and C++ to over 150 students, which is probably why I explain things
-          the way I do.
-        </p>
-        <div class="stats">
-          <div class="stat"><span class="stat__num">3.75</span><span class="stat__label">GPA out of 4.0</span></div>
-          <div class="stat"><span class="stat__num">150+</span><span class="stat__label">Students taught</span></div>
-          <div class="stat"><span class="stat__num">300+</span><span class="stat__label">Entries outranked</span></div>
-          <div class="stat"><span class="stat__num">1</span><span class="stat__label">Paper accepted</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <h2 id="skills"><span>What I use</span></h2>
+  <div class="cols">
+    <div><h3>Agents and LLMs</h3><p>CrewAI, n8n agent workflows, OpenAI and Claude APIs, prompt engineering</p></div>
+    <div><h3>Machine learning</h3><p>PyTorch, scikit-learn, Pandas, NumPy, SHAP, IBM AIF360, NLP, TF-IDF</p></div>
+    <div><h3>Automation</h3><p>n8n, Zapier, GoHighLevel, webhooks, REST APIs</p></div>
+    <div><h3>Backend and data</h3><p>Python, FastAPI, PostgreSQL, MySQL, MS SQL Server, JavaScript, React</p></div>
+    <div><h3>Tools</h3><p>Docker, Git, Linux, AWS, Jupyter</p></div>
+    <div><h3>Languages</h3><p>Python, C, C++, SQL, JavaScript</p></div>
+  </div>
 
-  <!-- ─── EXPERIENCE ─── -->
-  <section class="section" id="experience">
-    <div class="container">
-      <span class="eyebrow reveal">Experience</span>
-      <h2 class="heading reveal">What I've been doing</h2>
+  <h2 id="education"><span>Education and courses</span></h2>
+  <div class="edu">
+    <p><strong>Bachelor’s in Computer Science</strong>, Lahore Garrison University, 2023 to 2027. 3.75 CGPA.</p>
+    <p>Agent Skills with Anthropic and ChatGPT Prompt Engineering for Developers (DeepLearning.AI). Programming in Python (Meta, Coursera). Build AI Agents with n8n. Data Quality, Management and Governance (Udemy, MFT Institute). Data Analytics and Business Intelligence (DigiSkills). Ethics and Professionalism Workshop (IEEE). Indigenous Robotics Workshop 8.0 (GEARS).</p>
+  </div>
 
-      <div class="timeline">
-        <div class="tl-item reveal">
-          <div class="tl-rail"><span class="tl-dot"></span><span class="tl-stem"></span></div>
-          <div class="panel tl-card">
-            <div class="tl-top">
-              <h3>AI Automation Intern</h3>
-              <span class="pill">Done</span>
-            </div>
-            <p class="tl-meta">Tech Buzz, Lahore · May 2026 to Jul 2026</p>
-            <ul>
-              <li>Build n8n, Zapier, and GoHighLevel workflows that run in production, not just in a demo.</li>
-              <li>Wire LLMs into real business processes for lead qualification and content generation.</li>
-              <li>Connect REST APIs and webhooks across CRMs, then debug until they hold up under real traffic.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tl-item reveal">
-          <div class="tl-rail"><span class="tl-dot"></span><span class="tl-stem"></span></div>
-          <div class="panel tl-card">
-            <div class="tl-top">
-              <h3>Senior Computer Science Lecturer</h3>
-              <span class="pill">Done</span>
-            </div>
-            <p class="tl-meta">Unique Group of Institutions, Lahore · Jun 2025 to Jun 2026</p>
-            <ul>
-              <li>Taught Python, C, and SQL to 100+ students through real, project based work.</li>
-              <li>Covered OOP, data structures, and database systems, and raised pass rates with better assessments.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tl-item reveal">
-          <div class="tl-rail"><span class="tl-dot"></span></div>
-          <div class="panel tl-card">
-            <div class="tl-top">
-              <h3>Computer Science Teacher</h3>
-              <span class="pill">Done</span>
-            </div>
-            <p class="tl-meta">Tameer e Nau Academy, Lahore · Nov 2024 to Aug 2025</p>
-            <ul>
-              <li>Taught programming and algorithms to 50+ students, hands on, in Python, C, C++, and SQL.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── PROJECTS ─── -->
-  <section class="section" id="projects">
-    <div class="container">
-      <span class="eyebrow reveal">Work</span>
-      <h2 class="heading reveal">Stuff I've actually shipped</h2>
-
-      <article class="panel project project--featured reveal">
-        <span class="pill pill--active">Accepted · IRAI 2026</span>
-        <h3 class="project__title">GenEdge</h3>
-        <p class="project__desc">
-          A six agent AI system built with CrewAI and IBM AIF360 that catches bias in
-          machine learning models automatically. Tested across four fairness datasets
-          and hit full parity on three of them. Selected from over 300 submissions for
-          the IEEE IES GenAI Challenge, now heading to IRAI 2026 in Melbourne.
-        </p>
-        <div class="tags"><span>Python</span><span>CrewAI</span><span>IBM AIF360</span></div>
-        <a href="https://github.com/salmankhalidawan-tech/GenEdge-Research-Project" target="_blank"
-          rel="noopener noreferrer" class="proj-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-          </svg>
-          View on GitHub
-        </a>
-      </article>
-
-      <div class="projects-grid">
-        <article class="panel project reveal">
-          <h3 class="project__title">Digit Recognition CNN</h3>
-          <p class="project__desc">
-            A custom CNN trained from scratch, no pretrained weights, hitting 99.14%
-            test accuracy on MNIST in 8 epochs. Shipped behind a FastAPI endpoint with
-            a live canvas UI for real-time, per-class confidence predictions.
-          </p>
-          <div class="tags"><span>Python</span><span>PyTorch</span><span>FastAPI</span></div>
-          <a href="https://github.com/salmankhalidawan-tech/digit-classifier" target="_blank"
-            rel="noopener noreferrer" class="proj-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </article>
-
-        <article class="panel project reveal">
-          <h3 class="project__title">Resume Screener</h3>
-          <p class="project__desc">
-            Matches candidates to job listings using TF-IDF and cosine similarity.
-            FastAPI backend, PostgreSQL storage, packaged in Docker.
-          </p>
-          <div class="tags"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span></div>
-          <a href="https://github.com/salmankhalidawan-tech/AI-Assisted-Resume-Screener-and-Candidate-Ranking-System"
-            target="_blank" rel="noopener noreferrer" class="proj-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </article>
-
-        <article class="panel project reveal">
-          <h3 class="project__title">Heart Disease Prediction</h3>
-          <p class="project__desc">
-            End to end ML pipeline on clinical data. Logistic regression and decision
-            trees, tuned past 85% accuracy.
-          </p>
-          <div class="tags"><span>Python</span><span>Pandas</span><span>Scikit learn</span></div>
-          <a href="https://github.com/salmankhalidawan-tech/Heart-Disease-Prediction" target="_blank"
-            rel="noopener noreferrer" class="proj-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </article>
-
-        <article class="panel project reveal">
-          <h3 class="project__title">MindTrace</h3>
-          <p class="project__desc">
-            A local first journaling app that reads your mood with NLTK's VADER and
-            charts it over time with Plotly.
-          </p>
-          <div class="tags"><span>Flask</span><span>NLTK</span><span>SQLite</span></div>
-          <a href="https://github.com/salmankhalidawan-tech/mindtrace" target="_blank" rel="noopener noreferrer"
-            class="proj-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── SKILLS ─── -->
-  <section class="section" id="skills">
-    <div class="container">
-      <span class="eyebrow reveal">Skills</span>
-      <h2 class="heading reveal">What I actually use</h2>
-
-      <div class="skills-grid">
-        <div class="panel skill-card reveal">
-          <h4>AI &amp; Agents</h4>
-          <div class="tags"><span>CrewAI</span><span>Multi Agent Systems</span><span>LLM Integration</span><span>Prompt Engineering</span></div>
-        </div>
-        <div class="panel skill-card reveal">
-          <h4>Machine Learning</h4>
-          <div class="tags"><span>PyTorch</span><span>Scikit learn</span><span>Pandas</span><span>NumPy</span><span>TF-IDF</span><span>NLP</span></div>
-        </div>
-        <div class="panel skill-card reveal">
-          <h4>Automation</h4>
-          <div class="tags"><span>n8n</span><span>Zapier</span><span>GoHighLevel</span><span>Webhooks</span><span>REST APIs</span></div>
-        </div>
-        <div class="panel skill-card reveal">
-          <h4>Languages</h4>
-          <div class="tags"><span>Python</span><span>JavaScript</span><span>C++</span><span>SQL</span></div>
-        </div>
-        <div class="panel skill-card reveal">
-          <h4>Backend &amp; data</h4>
-          <div class="tags"><span>FastAPI</span><span>PostgreSQL</span><span>MySQL</span><span>MS SQL Server</span></div>
-        </div>
-        <div class="panel skill-card reveal">
-          <h4>Tools</h4>
-          <div class="tags"><span>Docker</span><span>Git</span><span>Linux</span><span>AWS</span><span>Jupyter</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CREDENTIALS ─── -->
-  <section class="section" id="credentials">
-    <div class="container">
-      <span class="eyebrow reveal">Credentials</span>
-      <h2 class="heading reveal">Proof of work</h2>
-
-      <div class="cred-grid">
-        <div class="panel cred cred--highlight reveal">
-          <h4>IEEE IES GenAI Challenge 2026</h4>
-          <p>Selected from 300+ submissions. Paper accepted at IRAI 2026, Melbourne.</p>
-        </div>
-        <div class="panel cred reveal"><h4>Agent Skills with Anthropic</h4><p>DeepLearning.AI</p></div>
-        <div class="panel cred reveal"><h4>ChatGPT Prompt Engineering for Developers</h4><p>DeepLearning.AI</p></div>
-        <div class="panel cred reveal"><h4>Programming in Python</h4><p>Meta, Coursera</p></div>
-        <div class="panel cred reveal"><h4>Data Quality, Management &amp; Governance</h4><p>Udemy, MFT Institute</p></div>
-        <div class="panel cred reveal"><h4>Data Analytics &amp; Business Intelligence</h4><p>DigiSkills</p></div>
-        <div class="panel cred reveal"><h4>Ethics &amp; Professionalism Workshop</h4><p>IEEE</p></div>
-        <div class="panel cred reveal"><h4>Indigenous Robotics Workshop 8.0</h4><p>GEARS</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CONTACT ─── -->
-  <section class="section" id="contact">
-    <div class="container">
-      <span class="eyebrow reveal">Contact</span>
-      <h2 class="heading reveal">Let's build something</h2>
-      <p class="body-text reveal" style="max-width:520px;margin-bottom:32px;">
-        I'm looking for AI/ML or automation internships and entry level roles.
-        Email me, or find me on LinkedIn and GitHub.
-      </p>
-
-      <div class="links reveal">
-        <a href="mailto:salmanawanlgu@gmail.com" class="pill-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          salmanawanlgu@gmail.com
-        </a>
-        <a href="https://github.com/salmankhalidawan-tech" target="_blank" rel="noopener noreferrer" class="pill-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-          </svg>
-          salmankhalidawan-tech
-        </a>
-        <a href="https://www.linkedin.com/in/salmankhalidd/" target="_blank" rel="noopener noreferrer" class="pill-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-          salmankhalidd
-        </a>
-      </div>
-
-      <form class="panel contact-form reveal" id="contactForm">
-        <input type="hidden" name="access_key" value="4f94c3a7-cc4f-4a13-a115-bf3a19fc230a" />
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">Name</label>
-            <input type="text" id="fname" placeholder="Your name" autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" placeholder="your@email.com" autocomplete="email" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="fmsg">Message</label>
-          <textarea id="fmsg" rows="4" placeholder="What are we building?"></textarea>
-        </div>
-        <button type="submit" class="btn btn--primary">Send message</button>
-        <p class="form__note" id="formNote"></p>
-      </form>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>2026, Muhammad Salman Khalid Awan</p>
-    </div>
+  <footer>
+    <a class="big" href="mailto:salmanawanlgu@gmail.com">salmanawanlgu@gmail.com</a>
+    <p>Have an agent that needs building, or a model that needs auditing? Email me. I reply within a day.</p>
   </footer>
+</main>
 
-  <script src="main.js"></script>
+</div>
+<script>
+(function(){
+  var rb=document.getElementById('rb'),bb=document.getElementById('bb'),vb=document.getElementById('vb'),
+      vd=document.getElementById('vd'),fix=document.getElementById('fix'),A=70,t=null;
+  function draw(){
+    var b=+rb.value,di=b/A;
+    bb.style.width=b+'%';vb.textContent=b+'%';
+    var ok=di>=0.8;
+    bb.style.background=ok?'var(--blue)':'#B5472F';
+    vd.className='verdict'+(ok?' ok':'');
+    vd.textContent='Disparate Impact '+di.toFixed(2)+(ok?'. Passes the four-fifths rule.':'. Fails the four-fifths rule (needs 0.80).');
+  }
+  function go(to,label){
+    clearInterval(t);
+    t=setInterval(function(){
+      var c=+rb.value;
+      if(c===to){clearInterval(t);fix.textContent=label;return;}
+      rb.value=c+(to>c?1:-1);draw();
+    },14);
+  }
+  rb.addEventListener('input',function(){clearInterval(t);fix.textContent='Run mitigation agent';draw();});
+  fix.addEventListener('click',function(){
+    if(fix.textContent==='Reset'){go(40,'Run mitigation agent');}
+    else{go(Math.round(A*0.97),'Reset');}
+  });
+  draw();
+})();
+</script>
 </body>
-
 </html>
